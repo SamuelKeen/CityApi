@@ -23,7 +23,7 @@ Compare to first ten from the no limit case: https://city-api.glitch.me/latLong/
 Get the second ten from the no limit case: https://city-api.glitch.me/latLong/usersInRadius?longitude=-117.72&latitude=34&radius=10000&limit=10&skip=10  
 Big limit returns everyone: https://city-api.glitch.me/latLong/usersInRadius?longitude=-117.72&latitude=34&radius=100000&limit=100000
 
-## /latLong/usersInRadius
+## /city/usersInRadius
 
 ### Parameter validation
 Missing city name returns 401: https://city-api.glitch.me/city/usersInRadius  
