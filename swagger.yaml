@@ -1,0 +1,157 @@
+openapi: 3.0.0
+info:
+  title: Retrieve users by location
+  description: This is a simple API that allows you to return users in or near various
+    locations specified either by a city or coordinates.
+  contact:
+    name: Sam Keen
+    email: samuelsimpsonkeen@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/SamuelSKeen/CityUsers/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: endUsers
+  description: General methods for use by users
+paths:
+  /city/usersInRadius:
+    get:
+      tags:
+      - endUsers
+      summary: Finds users within a given radius of the centre of a city or specifically
+        listed as registered in that city.
+      description: |
+        By passing in the appropriate options, you can search for
+        users either currently within a given radius of the a city or registered
+        with that city.
+      operationId: getUsersInRadiusOfCity
+      parameters:
+      - name: city
+        in: query
+        description: pass in the name of the city to calculate the radius from
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: radius
+        in: query
+        description: pass in the name of the city to calculate the radius from
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+      - name: skip
+        in: query
+        description: number of records to skip for pagination
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: maximum number of records to return
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 50
+          minimum: 0
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                x-content-type: application/json
+        "400":
+          description: bad input parameter
+        "204":
+          description: unrecognised city
+      x-swagger-router-controller: EndUsers
+  /latLong/usersInRadius:
+    get:
+      tags:
+      - endUsers
+      summary: Returns users within a radius of given latitude and longitude coordinates.
+      description: |
+        By passing in the appropriate options, you can search for
+        users within a radius of the given latitude and longitude. Primarily for
+        when the server does not have the location of a given city.
+      operationId: getUsersInRadiusOfLatLong
+      parameters:
+      - name: latitude
+        in: query
+        description: latitude to search from
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: number
+      - name: longitude
+        in: query
+        description: longitude to search from
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: number
+      - name: radius
+        in: query
+        description: radius in miles to include
+        required: true
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+      - name: skip
+        in: query
+        description: number of records to skip for pagination
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: maximum number of records to return
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 50
+          minimum: 0
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                x-content-type: application/json
+        "400":
+          description: bad input parameter
+      x-swagger-router-controller: EndUsers
+components: {}
