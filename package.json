@@ -9,7 +9,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "body-parser": "^1.19.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "great-circle-distance": "^1.0.2"
   },
   "engines": {
